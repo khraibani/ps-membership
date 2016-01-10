@@ -1,15 +1,29 @@
 var Registration = require("../lib/registration");
+var db = require("secondthought");
+
 
 describe("Registration", function(){
+    var reg = {};
+    before(function(done){
+       db.connect({db : "membership"}, function(err, db){
+           reg = new Registration(db);
+
+           done();
+       })
+    });
+
 
     describe("a valid application", function(){
         var regResult = {};
-        before(function(){
-            regResult = Registration.applyForMembership({
+        before(function(done){
+            reg.applyForMembership({
                 email : "sein.khraibani@gmail.com",
                 password : "sein.khraibani@gmail.com",
-                confirm : "sein.khraibani@gmail.com",
-
+                confirm : "sein.khraibani@gmail.com"
+            },
+            function(err, result){
+                regResult = result;
+                done();
             });
         });
 
