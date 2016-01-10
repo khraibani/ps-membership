@@ -4,6 +4,7 @@
   "description": "A membership system",
   "main": "index.js",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "secondthought": "0.0.7"
   },
   "devDependencies": {

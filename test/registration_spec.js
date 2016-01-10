@@ -16,14 +16,15 @@ describe("Registration", function(){
     describe("a valid application", function(){
         var regResult = {};
         before(function(done){
-            reg.applyForMembership({
-                email : "sein.khraibani@gmail.com",
-                password : "sein.khraibani@gmail.com",
-                confirm : "sein.khraibani@gmail.com"
-            },
-            function(err, result){
-                regResult = result;
-                done();
+            db.users.destroyAll(function(err, result){
+                reg.applyForMembership({
+                    email : "sein.khraibani@gmail.com",
+                    password : "sein.khraibani@gmail.com",
+                    confirm : "sein.khraibani@gmail.com"
+                }, function(err, result){
+                    regResult = result;
+                    done();
+                });
             });
         });
 
@@ -33,9 +34,18 @@ describe("Registration", function(){
         it("creates a user", function(){
             regResult.user.should.be.defined;
         });
-        it("creates a log entry");
-        it("sets the user's status to approved");
-        it("offer a welcome message");
+        it("creates a log entry", function(){
+            regResult.log.should.be.defined;
+        });
+        it("sets the user's status to approved", function(){
+            regResult.user.status.should.equal("approved");
+        });
+        it("offer a welcome message", function(){
+            regResult.message.should.equal("Welcome!");
+        });
+        it("increments the signInCount", function(){
+            regResult.user.signInCount.should.equal(1);
+        });
     });
 
     describe("an empty or null email", function(){

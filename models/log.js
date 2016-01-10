@@ -10,3 +10,4 @@ var Log = function(args) {
 
     return log;
 }
+module.exports = Log;
