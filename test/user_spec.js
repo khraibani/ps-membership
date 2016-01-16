@@ -7,11 +7,11 @@ describe("User", function(){
         var user = {};
 
         before(function(){
-            user = new User({email : "sein.khraibani@gmail.com"});
+            user = new User({email : "test@test.com"});
         });
 
-        it("email is sein.khraibani@gmail.com", function(){
-            user.email.should.equal("sein.khraibani@gmail.com")
+        it("email is test@test.com", function(){
+            user.email.should.equal("test@test.com");
         });
         it("has an authentication token", function(){
             user.authenticationToken.should.defined;
